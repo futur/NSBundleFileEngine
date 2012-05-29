@@ -1,0 +1,18 @@
+Phonegap/Cordova plugin for reading a plist file from NSBundle (iOS). 
+This plugin right now solves only a single purpose of reading from plist file.
+
+Future improvements will include,
+
+1. Writing to plist file.
+2. Reading any file from Bundle.
+3. Open to receive suggestions related from the dev community.
+
+Install:
+
+The usual procedure to install phonegap/cordova plugin in an iOS env.
+
+Usage:
+
+Check the usage_sample.html and proj_plist_file_sample_with_key.plist files. the sample will showcase reading a key host_url from .plist file residing inside the project bundle.
+
+
