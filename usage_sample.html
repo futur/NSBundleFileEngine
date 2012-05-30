@@ -4,6 +4,8 @@
     <title>Device Properties Example</title>
 
     <script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="NSBundleFileEngine.js"></script>
+      
     <script type="text/javascript" charset="utf-8">
 
     // Wait for PhoneGap to load
@@ -13,7 +15,18 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
-    alert('on device ready');
+    //alert('on device ready');
+        var NSBundleFileEngine = window.plugins.nsbundle;
+        
+        //initially the host_url has http://googel.com as value.
+        
+        var plistObj = {key:"host_url",value:"http://github.com"};
+        NSBundleFileEngine.writeToPlistFileWithValues(plistObj,function(res){console.log('write success : '+ res);},function(err){console.log('werr :' +err);});
+        
+        
+        NSBundleFileEngine.readPlistFile(['host_url'],function(res){console.log('success : '+ res);},function(err){console.log(err);});
+        
+        
         var element = document.getElementById('deviceProperties');
 
         element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
@@ -21,8 +34,6 @@
                             'Device Platform: ' + device.platform + '<br />' + 
                             'Device UUID: '     + device.uuid     + '<br />' + 
                             'Device Version: '  + device.version  + '<br />';
-                            
-        
     }
 
     </script>

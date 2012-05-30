@@ -30,6 +30,26 @@
         [self writeJavascript: [pluginResult toErrorCallbackString:self.callbackID]];
     }
 }
+
+-(void)writeToPlistFileWithValues:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options{
+    NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSString *strResult;
+    CDVPluginResult *pluginResult;
+    self.callbackID = [arguments pop];
+    @try {
+        [infoDict setValue:[options valueForKey:@"value"] forKey:[options valueForKey:@"key"]];
+        strResult = [NSString stringWithFormat:@"Value updated for : %@",[options valueForKey:@"key"]];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:strResult];
+        [self writeJavascript:[pluginResult toSuccessCallbackString:self.callbackID]];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception writing : %@", exception);
+        strResult = @"failed to update";
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:strResult];
+        [self writeJavascript:[pluginResult toErrorCallbackString:self.callbackID]];
+    }
+}
+
 -(NSString*)getPlistValueForKey:(NSString*)strKey{
     NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
     NSString* version = [infoDict objectForKey:strKey];

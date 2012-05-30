@@ -16,6 +16,9 @@
 @property (nonatomic, copy) NSString* callbackID;
 
 - (void) readPlistFile:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
+
 -(NSString*)getPlistValueForKey:(NSString*)strKey;
--(BOOL)writePlistValue:(NSString*)strValue forKey:(NSString*)strKey;
+
+-(void)writeToPlistFileWithValues:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
+
 @end
